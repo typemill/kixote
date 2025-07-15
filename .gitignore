@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+
+# vscode
+.vscode/
+vscode/
+
+# SQLite database and data
+/data/
+/dataold/
+*.db
+
+# OS files
+.DS_Store
+
+# dotenv
+.env
+
+# example files
+
+input.html
+output.pdf
+payload.json
