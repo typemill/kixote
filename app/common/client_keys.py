@@ -54,7 +54,7 @@ def update_client_key(client_id, new_api_key):
     conn.commit()
     conn.close()
 
-def delete_client(client_id):
+def remove_client(client_id):
     conn = sqlite3.connect(DB_PATH)
     conn.execute("DELETE FROM client_keys WHERE client_id=?", (client_id,))
     conn.commit()

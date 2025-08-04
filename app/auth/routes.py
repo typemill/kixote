@@ -4,7 +4,7 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 from app.common.rate_limiter import rate_limit
 from app.common.jwt_blacklist import BLACKLIST
 from app.common.config import Config
-from app.common.client_keys import add_client_key, get_client_key, get_client_by_id, list_client_keys, delete_client_key, update_client_key
+from app.common.client_keys import add_client_key, get_client_key, get_client_by_id, list_client_keys, delete_client_key, update_client_key, remove_client
 import secrets
 
 # %% create blueprint
@@ -105,3 +105,18 @@ def recreate_client_key():
     new_api_key = secrets.token_urlsafe(32)
     update_client_key(client_id, new_api_key)
     return jsonify({"message": "Client key recreated", "client_id": client_id, "api_key": new_api_key}), 200
+
+@auth_bp.route("/delete_client", methods=["DELETE"])
+def delete_client():
+    if not Config.LOGIN or not Config.ADMIN_KEY:
+        return jsonify({"error": "Not available"}), 403
+    admin_key = request.headers.get("X-ADMIN-KEY")
+    if admin_key != current_app.config["ADMIN_KEY"]:
+        return jsonify({"error": "Unauthorized"}), 401
+    data = request.json
+    client_id = data.get("client_id")
+    if not client_id or not isinstance(client_id, str):
+        return jsonify({"error": "Missing or invalid 'client_id'"}), 400
+
+    remove_client(client_id)
+    return jsonify({"message": "Client deleted", "client_id": client_id}), 200

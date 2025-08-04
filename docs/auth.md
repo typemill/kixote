@@ -88,6 +88,27 @@ curl -X POST http://localhost:5000/auth/create_client_key \
 
 ---
 
+## Delete Client 
+
+Delete a client with a client id.
+
+```sh
+curl -X DELETE http://localhost:5000/auth/delete_client \
+  -H "Content-Type: application/json" \
+  -H "X-ADMIN-KEY: 123abc" \
+  -d '{"client_id": "testclient"}'
+```
+
+**Response:**
+```json
+{
+  "message": "Client deleted",
+  "client_id": "testclient"
+}
+```
+
+---
+
 ## Login
 
 Obtain a JWT access token using your API key.

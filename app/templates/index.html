@@ -5,33 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kixote</title>
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    body {
+      min-height: 100vh;
+      min-width: 100vw;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
       background: #f9f9f9;
       color: #1a1a1a;
       font-family: Arial, sans-serif;
       overflow: hidden;
     }
     h1 {
-      font-size: 8rem;
+      font-size: 8vw;
       margin: 0;
-      letter-spacing: 1rem;
+      letter-spacing: 0.5vw;
       text-transform: capitalize;
+      text-align: center;
+      word-break: break-word;
     }
     p {
-      font-size: 1.5rem;
+      font-size: 4vw;
       margin: 10px 0;
       color: #1a1a1a;
+      text-align: center;
+      max-width: 90vw;
     }
     .glow {
-      margin-right: 318px;
-      width: 20px;
-      height: 20px;
+      margin-bottom: 24px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       background: radial-gradient(circle, #1a1a1a, transparent);
       animation: pulse 4s infinite;
@@ -46,11 +57,27 @@
         opacity: 0.5;
       }
     }
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 12vw;
+        letter-spacing: 1vw;
+      }
+      p {
+        font-size: 5vw;
+      }
+      .glow {
+        width: 24px;
+        height: 24px;
+      }
+      body {
+        padding: 10vw 2vw;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="glow"></div>
   <h1>KIXOTE</h1>
-  <p>AI- and Print-Services for Typemill-Authors</p>
+  <p>AI- and Print-Services for Typemill</p>
 </body>
 </html>
