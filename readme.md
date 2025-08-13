@@ -1,6 +1,6 @@
 # Kixote
 
-**Kixote** is a docker app and backend service for [Typemill](https://typemill.net), providing various API services including authentication, PDF generation via WeasyPrint, and AI services in future. It is designed to support Typemill instances, but can also be self-hosted in future to host these services on your own.
+**Kixote** is a Dockerized backend service for [Typemill](https://typemill.net), offering API services such as authentication, PDF generation via WeasyPrint, and future AI services. It is designed to support Typemill instances, with the potential for self-hosted deployments in the future.
 
 ## Requirements
 
@@ -8,14 +8,13 @@
 - Flask
 - Flask-JWT-Extended
 - Flask-Limiter
-- SQLite (optional for persistent rate limiting)
-- Other dependencies listed in `requirements.txt`
+- SQLite
 - Docker
 
 ## Documentation
 
-Full documentation and API usage can be found in the docs-folder.
+Full documentation and API usage can be found in the `docs` folder.
 
 ## Notes
 
-This project is **not ready** for self-hosting yet.
+This project is **not yet ready** for self-hosting and should be used for development or testing purposes only.
