@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, send_file
 from flask_jwt_extended import jwt_required
-from app.common.rate_limiter import rate_limit
+from app.common.decorators import auto_add_client_if_needed, rate_limit, request_limit
 from weasyprint import HTML, CSS
 import tempfile
 import os
@@ -9,6 +9,8 @@ weasyprint_bp = Blueprint("weasyprint", __name__)
 
 @weasyprint_bp.route("/pdf", methods=["POST"])
 @jwt_required()
+@auto_add_client_if_needed
+@request_limit("5/Minutes")
 @rate_limit(cost=5)
 def generate_pdf():
     data = request.get_json()

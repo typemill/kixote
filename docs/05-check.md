@@ -18,7 +18,7 @@ curl -H "Authorization: Bearer YOUR_JWT_TOKEN" http://localhost:5000/check/auth
 ```
 ## Rate Limit Check
 
-Check if your client is within the allowed rate limit.
+Check if the rate limiting works (will add 1 point to usage).
 
 ```sh
 curl -H "Authorization: Bearer YOUR_JWT_TOKEN" http://localhost:5000/check/limit

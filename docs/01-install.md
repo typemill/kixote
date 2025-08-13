@@ -39,19 +39,20 @@ docker run -d \
   -p 5000:5000 \
   -v /path/on/host/data:/data \
   -e KIXOTE_DB_PATH=/data/clients.db \
-  -e LOGIN=true \
+  -e LOGIN_REQUIRED=false \
   -e ADMIN_KEY=your_admin_key \
   -e SECRET_KEY=your_secret_key \
   -e JWT_SECRET_KEY=your_jwt_secret \
   -e CLIENT_LIMIT_MAKER=220 \
   -e CLIENT_LIMIT_BUSINESS=1220 \
   --name kixote-app \
+  --restart unless-stopped \
   kixote-app
 ```
 
 - Replace `/path/on/host/data` with the persistant data directory on your host with a sqlite db.
 - KIXOTE_DB_PATH=/data/clients.db is the path to the sqlite db inside the container.
-- LOGIN=true activates the admin endpoints and the login routes to get JWT tokens.
+- LOGIN_REQUIRED=true activates the admin endpoints to manage client api keys and the login routes to get JWT tokens with client api keys.
 - Replace `your_admin_key` with secure values to access the endpoints for admins.
 - Replace `your_jwt_secret` with secure values to generate and validate a JWT.
 - CLIENT_LIMIT_MAKER is the rate limit for a maker client.
@@ -61,13 +62,7 @@ docker run -d \
 
 ## 5. Access the Application
 
-Open your browser and go to:
-
-```
-
-```
-
-or use your server's IP address if running remotely.
+Open your browser and visit your url or use your server's IP address if running remotely. The application has only one public startpage, everything else is handled via an api. 
 
 ---
 

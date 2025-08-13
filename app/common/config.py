@@ -2,7 +2,7 @@ import os
 
 class Config:
     """Base configuration class."""
-    LOGIN = os.environ.get("LOGIN", "True").lower() == "true"
+    LOGIN_REQUIRED = os.environ.get("LOGIN_REQUIRED", "false").lower() == "true"
     ADMIN_KEY = os.environ.get("ADMIN_KEY", "")
     SECRET_KEY = os.environ.get("SECRET_KEY", "")
     JWT_SECRET_KEY = os.environ.get("JWT_SECRET_KEY", "")
@@ -10,7 +10,7 @@ class Config:
         "maker": int(os.environ.get("CLIENT_LIMIT_MAKER", 220)),
         "business": int(os.environ.get("CLIENT_LIMIT_BUSINESS", 1220))
     }
-    DB_PATH = os.environ.get("KIXOTE_DB_PATH", "/data/clients.db")
+    DB_PATH = os.environ.get("KIXOTE_DB_PATH", "./data/clients.db")
     
     # NOT IN USE    
     DEBUG = os.environ.get("DEBUG", "True") == "True"
