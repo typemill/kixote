@@ -33,7 +33,7 @@ You can provide the following fields (all except `html` are optional):
 ### Example cURL
 
 ```sh
-curl -X POST http://localhost:5000/weasyprint/pdf \
+curl -X POST http://localhost:5000/book/pdf \
   -H "Authorization: Bearer YOUR_JWT_TOKEN" \
   -H "Content-Type: application/json" \
   -d @payload.json \
@@ -55,7 +55,7 @@ data = {
     "html": "<h1>Hello, PDF!</h1><p>This is a test document.</p>",
     "filename": "custom.pdf"
 }
-response = requests.post("http://localhost:5000/weasyprint/pdf", json=data, headers=headers)
+response = requests.post("http://localhost:5000/book/pdf", json=data, headers=headers)
 with open("output.pdf", "wb") as f:
     f.write(response.content)
 ```
@@ -71,7 +71,7 @@ $data = [
     "html" => "<h1>Hello, PDF!</h1><p>This is a test document.</p>",
     "filename" => "custom.pdf"
 ];
-$ch = curl_init('http://localhost:5000/weasyprint/pdf');
+$ch = curl_init('http://localhost:5000/book/pdf');
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     "Authorization: Bearer $token",
     "Content-Type: application/json"
@@ -90,7 +90,7 @@ curl_close($ch);
 ### Example JavaScript (fetch, Node.js or browser)
 
 ```javascript
-fetch("http://localhost:5000/weasyprint/pdf", {
+fetch("http://localhost:5000/book/pdf", {
   method: "POST",
   headers: {
     "Authorization": "Bearer YOUR_JWT_TOKEN",

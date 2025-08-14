@@ -7,8 +7,8 @@ class Config:
     SECRET_KEY = os.environ.get("SECRET_KEY", "")
     JWT_SECRET_KEY = os.environ.get("JWT_SECRET_KEY", "")
     CLIENT_LIMITS = {
-        "maker": int(os.environ.get("CLIENT_LIMIT_MAKER", 220)),
-        "business": int(os.environ.get("CLIENT_LIMIT_BUSINESS", 1220))
+        "MAKER": int(os.environ.get("CLIENT_LIMIT_MAKER", 220)),
+        "BUSINESS": int(os.environ.get("CLIENT_LIMIT_BUSINESS", 1220))
     }
     DB_PATH = os.environ.get("KIXOTE_DB_PATH", "./data/clients.db")
     

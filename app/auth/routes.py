@@ -17,7 +17,7 @@ auth_bp = Blueprint("auth", __name__)
 
 
 @auth_bp.route("/list_clients", methods=["GET"])
-@request_limit("1/Seconds")
+@request_limit("1 per second")
 def list_clients():
     if not Config.ADMIN_KEY:
         return jsonify({"error": "Admin key required"}), 403
@@ -28,7 +28,7 @@ def list_clients():
     return jsonify(clients), 200
 
 @auth_bp.route("/get_client", methods=["GET"])
-@request_limit("1/Seconds")
+@request_limit("1 per second")
 def get_client():
     if not Config.ADMIN_KEY:
         return jsonify({"error": "Admin key required"}), 403
@@ -45,7 +45,7 @@ def get_client():
     return jsonify(client), 200
 
 @auth_bp.route("/delete_client", methods=["DELETE"])
-@request_limit("1/Seconds")
+@request_limit("1 per second")
 def delete_client():
     if not Config.ADMIN_KEY:
         return jsonify({"error": "Admin key required"}), 403
@@ -67,7 +67,7 @@ def delete_client():
 
 
 @auth_bp.route("/create_client", methods=["POST"])
-@request_limit("1/Seconds")
+@request_limit("1 per second")
 def create_client():
     if not Config.LOGIN_REQUIRED:
         return jsonify({"error": "Not available"}), 404
@@ -106,7 +106,7 @@ def create_client():
 
 
 @auth_bp.route("/recreate_client_key", methods=["POST"])
-@request_limit("1/Seconds")
+@request_limit("1 per second")
 def recreate_client_key():
     if not Config.LOGIN_REQUIRED:
         return jsonify({"error": "Not available"}), 404
@@ -142,7 +142,7 @@ def recreate_client_key():
 
 
 @auth_bp.route("/revoke_client_key", methods=["POST"])
-@request_limit("1/Seconds")
+@request_limit("1 per second")
 def revoke_client_key():
     if not Config.LOGIN_REQUIRED:
         return jsonify({"error": "Not available"}), 404
@@ -195,7 +195,7 @@ def get_client_by_key():
 """
 
 @auth_bp.route("/login", methods=["POST"])
-@request_limit("10/Minutes")
+@request_limit("10 per minute")
 def login():
     if not Config.LOGIN_REQUIRED:
         return jsonify({"error": "Not available"}), 404

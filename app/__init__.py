@@ -24,7 +24,7 @@ def create_app():
     # Register Blueprints
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(check_bp, url_prefix="/check")
-    app.register_blueprint(weasyprint_bp, url_prefix="/weasyprint")
+    app.register_blueprint(weasyprint_bp, url_prefix="/book")
     # app.register_blueprint(ki_services_bp, url_prefix="/ki")
     # app.register_blueprint(agent_services_bp, url_prefix="/agents")
     

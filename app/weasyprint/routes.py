@@ -10,7 +10,7 @@ weasyprint_bp = Blueprint("weasyprint", __name__)
 @weasyprint_bp.route("/pdf", methods=["POST"])
 @jwt_required()
 @auto_add_client_if_needed
-@request_limit("5/Minutes")
+@request_limit("5 per minute")
 @rate_limit(cost=5)
 def generate_pdf():
     data = request.get_json()
