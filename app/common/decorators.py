@@ -1,11 +1,11 @@
-from flask import jsonify
+from flask import current_app, jsonify
 from flask_jwt_extended import get_jwt
+from flask_limiter.errors import RateLimitExceeded
 from app.common.init_db import get_db
 from app.common.limiter_instance import limiter
 from functools import wraps
 from .config import Config
 from datetime import datetime
-from app import limiter
 
 
 def auto_add_client_if_needed(f):
@@ -43,9 +43,8 @@ def request_limit(limit: str):
         def wrapped(*args, **kwargs):
             try:
                 return f_limited(*args, **kwargs)
-            except Exception as e:
-                return jsonify({"error": "Request limit exceeded", "message": str(e)}), 429
-
+            except RateLimitExceeded:
+                return jsonify({"error": "Request limit exceeded"}), 429
         return wrapped
 
     return decorator
@@ -57,8 +56,14 @@ def rate_limit(cost):
         def decorated_function(*args, **kwargs):
             claims = get_jwt()
             client_id = claims["sub"]
-            license_type = claims["license"]
-            limit = Config.CLIENT_LIMITS[license_type]
+            if not client_id:
+                return jsonify({"error": "No client ID found in token"}), 400            
+            license_type = claims.get("data", {}).get("plan", "MAKER")
+            if not license_type:
+                return jsonify({"error": "No license type found in token"}), 400
+            limit = current_app.config["CLIENT_LIMITS"].get(license_type, 220)
+            if not limit:
+                return jsonify({"error": "No limit found for this license type"}), 400            
             today = datetime.utcnow().strftime("%Y-%m-%d")
 
             conn = get_db()

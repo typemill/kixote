@@ -64,3 +64,4 @@ def update_client_key(client_id, new_api_key):
     conn.execute("UPDATE client_keys SET api_key=?, created_at=datetime('now') WHERE client_id=?", (new_api_key, client_id))
     conn.commit()
     conn.close()
+
